@@ -10,4 +10,6 @@
 rootProject.name = 'ipay'
 include 'ipay-api'
 include 'ipay-client'
+include 'ipay-server'
 include 'ipay-sample-client'
+
