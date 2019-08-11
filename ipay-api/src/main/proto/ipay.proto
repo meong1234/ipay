@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "com.ipay.api";
+option go_package = "golang/api";
+
+
+service IpayService {
+    rpc CreateCustomer (CreateCustomerRequest) returns (CreateCustomerResponse) {}
+}
+
+message CreateCustomerRequest {
+    string name = 1;
+    string email = 2;
+    string phonenumber = 3;
+}
+
+message CreateCustomerResponse {
+    ServiceGenericReply reply = 1;
+    string customer_id = 2;
+    string name = 3;
+    string email = 4;
+    string phonenumber = 5;
+}
+
+message ServiceError {
+    string code = 1;
+    string message = 2;
+}
+
+message ServiceGenericReply {
+    bool success = 1;
+    repeated ServiceError errors = 2;
+}

@@ -1,0 +1,45 @@
+plugins {
+    id "java"
+    id "com.google.protobuf" version "0.8.5"
+}
+
+group "com.sample.grpc"
+version "0.0.1"
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testImplementation("org.mockito:mockito-core:2.+")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.0")
+
+    compile "com.google.protobuf:protobuf-java:3.5.1"
+    compile "com.google.protobuf:protobuf-java-util:3.5.1"
+
+    compile "io.grpc:grpc-protobuf:1.18.0"
+    compile "io.grpc:grpc-stub:1.18.0"
+
+    implementation "javax.annotation:javax.annotation-api:1.2"
+}
+
+
+protobuf {
+    // Configure the protoc executable
+    protoc {
+        // Download from repositories
+        artifact = "com.google.protobuf:protoc:3.5.1"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.0.3"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                outputSubDir = "java"
+            }
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src"
+}
