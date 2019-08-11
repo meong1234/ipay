@@ -1,0 +1,2 @@
+export APP_ENVIRONMENT=staging
+export PORT='8080'
