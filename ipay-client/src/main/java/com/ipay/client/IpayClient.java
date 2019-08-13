@@ -2,8 +2,9 @@ package com.ipay.client;
 
 import com.gojek.ApplicationConfiguration;
 import com.gojek.Figaro;
-import com.ipay.api.Ipay;
-import com.ipay.api.IpayServiceGrpc;
+import com.ipay.api.grpc.CreateCustomerRequest;
+import com.ipay.api.grpc.CreateCustomerResponse;
+import com.ipay.api.grpc.IpayServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -25,14 +26,14 @@ public class IpayClient {
 
         channel = ManagedChannelBuilder
             .forAddress(config.getValueAsString("IPAY_HOST"), config.getValueAsInt("IPAY_PORT"))
-            .usePlaintext(true)
+            .usePlaintext()
             .build();
 
         stub = IpayServiceGrpc.newBlockingStub(channel);
     }
 
 
-    public Ipay.CreateCustomerResponse createCustomer(Ipay.CreateCustomerRequest request) {
+    public CreateCustomerResponse createCustomer(CreateCustomerRequest request) {
         return stub.createCustomer(request);
     }
 

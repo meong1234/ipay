@@ -1,6 +1,7 @@
 package com.ipay;
 
-import com.ipay.api.Ipay;
+import com.ipay.api.grpc.CreateCustomerRequest;
+import com.ipay.api.grpc.CreateCustomerResponse;
 import com.ipay.client.IpayClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,13 +14,13 @@ public class IpayApplication {
 
         IpayClient ipayClient = new IpayClient();
 
-        Ipay.CreateCustomerRequest createCustomerRequest = Ipay.CreateCustomerRequest.newBuilder()
+        CreateCustomerRequest createCustomerRequest = CreateCustomerRequest.newBuilder()
             .setName("some-random-name")
             .setEmail("randomemail@email.com")
             .setPhonenumber("somephoenumber")
             .build();
 
-        Ipay.CreateCustomerResponse response = ipayClient.createCustomer(createCustomerRequest);
+        CreateCustomerResponse response = ipayClient.createCustomer(createCustomerRequest);
         if (response.getReply().getSuccess()) {
             logger.info("success");
         }

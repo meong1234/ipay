@@ -1,11 +1,14 @@
 syntax = "proto3";
 
-option java_package = "com.ipay.api";
+package com.ipay.api;
+option java_package = "com.ipay.api.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "IpayApiProto";
+
 option go_package = "golang/api";
 
-
 service IpayService {
-    rpc CreateCustomer (CreateCustomerRequest) returns (CreateCustomerResponse) {}
+    rpc CreateCustomer (CreateCustomerRequest) returns (CreateCustomerResponse);
 }
 
 message CreateCustomerRequest {
